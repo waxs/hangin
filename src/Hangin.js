@@ -5,7 +5,7 @@
 import Core from '@js/Core';
 
 /** ----------------------------------------
-     Utilities
+    Utils
  ---------------------------------------- */
 
 import construct from '@js/setup/_construct';
