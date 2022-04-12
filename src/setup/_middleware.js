@@ -12,9 +12,10 @@ function middleware(obj) {
 
 		if(typeof fn === 'function' && fn.name !== 'Core') {
 			prototype[method] = function(...args) {
-				this._chain.push(fn.name);
-				return fn.call(this, ...args);
+				fn && this._chain.push(fn.name);
+				return fn.call(this, ...args); 
 			};
+
 		}
 	}
 
