@@ -3,7 +3,6 @@
  ---------------------------------------- */
 
 import _id from '@util/function/_id';
-import _watcher from '@util/function/_watcher';
 import _timestamp from '@util/format/_timestamp';
 import _toCamel from '@util/format/_toCamel';
 

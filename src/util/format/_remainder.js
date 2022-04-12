@@ -5,7 +5,6 @@
 import _error from '@util/debug/_error';
 import _isType from '@util/check/_isType';
 import _timestamp from '@util/format/_timestamp';
-import _params from '@util/function/_params';
 
 /** ----------------------------------------
     Remainder
