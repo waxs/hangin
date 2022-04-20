@@ -38,7 +38,7 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 
 **Loop** (10 methods)
 
-* `cron()` used for setting a cron job like `.cron('* * * * *')
+* `cron()` used for setting a cron job like `.cron('* * * * *')`
 * `daily()` set daily execution at specific time `.daily('14:00')`
 * `every()` create a recurring schedule for minutes, hours, day, week, month or year `.every('hour')`
 * `hourly()` recur a schedule every hour
