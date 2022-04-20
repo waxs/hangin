@@ -1,7 +1,5 @@
 # Hangin JS
 
-![Testing](https://github.com/waxs/hangin/workflows/Testing/badge.svg)
-
 Schedule, plan, and await the outcome with hangin JS, just hang in there. Hangin can schedule one, or multiple, functions to take place and recur the process incrementaly. It's a straight forward toolkit that can be used either for front- and/or backend projects. It provides a clean and easy to read syntax for planning actions, and making sure to schedule them taking place for a specific moment in time.
 
 ## Initiate Hangin JS
@@ -23,6 +21,30 @@ Once Hangin JS has been initiated multiple options are available to schedule and
 
 ```javascript
 hangin.schedule([ ... ]).every('week', 'saterday');
+```
+
+## Pass data
+
+Jobs can pass information to the next job, this can be handy for resolving endpoints and then passing it to the next job that needs the data. In this case we resolve the data from an endpoint, we use the `next` resolver to pass the data to the next job that will log the data. The next job will recieve a `payload` as a second parameter that contains the data. 
+
+```javascript
+hangin.schedule([
+    {
+        name: 'Fetch data', 
+        action: next => { 
+            fetch('https://example.com/api/')
+                .then(response => response.json())
+                .then(next);
+        } 
+    },
+    {
+        name: 'Handle data',
+        action: (next, payload) => {
+            console.log('Data from endpoint:', payload);
+            next();
+        }
+    }
+]) 
 ```
 
 🚧 Package is currently in beta.
@@ -60,12 +82,13 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 
 * `at()` can be combined for setting a specific time `.at('14:00')`
 
-**Limiter** (4 methods)
+**Limiter** (5 methods)
 
 * `times()`
+* `untill()`
+* `between()`
 * `from()`
 * `to()`
-* `between()`
 
 ### Information
 
@@ -80,6 +103,12 @@ Hooks provivide a way to monitor changes taking place. For instance, a specific 
 ```javascript
 hangin.event.on('active', payload => {
     console.log(`Active has been changed: ${ payload }.`);
+});
+```
+
+```javascript
+hangin.event.on('loading', state => {
+    console.log(state ? 'Loading...' : 'Done!');
 });
 ```
 
