@@ -38,27 +38,27 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 
 **Loop** (10 methods)
 
-* `cron()`
-* `daily()`
-* `every()`
-* `hourly()` 
-* `interval()`
-* `monthly()`
-* `weekly()` 
-* `yearly()`
-* `weekend()`
-* `weekdays()`
+* `cron()` used for setting a cron job like `.cron('* * * * *')
+* `daily()` set daily execution at specific time `.daily('14:00')`
+* `every()` create a recurring schedule for minutes, hours, day, week, month or year `.every('hour')`
+* `hourly()` recur a schedule every hour
+* `interval()` use an interval in milliseconds `.interval(10000)`
+* `monthly()` recur a schedule every month on given day `.monthly(10)`
+* `weekly()` recur a schedule every week on given day `.weekly('monday')`
+* `yearly()` recur a schedule every year on given month `.yearly('jan')`
+* `weekend()` will execute on saterday and sunday `.weekend('17:00')`
+* `weekdays()` will recur on every day from monday till friday `weekdays('12:00')`
 
 **Once** (4 methods)
 
-* `date()`
-* `instant()`
-* `once()`
-* `timestamp()`
+* `date()` set on a given date `.date('2022-02-12')`
+* `instant()` will execute instantly after running the script
+* `once()` will execute once on a given day and time `.once('2022-02-12', '11:45')`
+* `timestamp()` set a specific timestamp for execution
 
 **Extension** (1 methods)
 
-* `at()`
+* `at()` can be combined for setting a specific time `.at('14:00')`
 
 **Limiter** (4 methods)
 
@@ -67,11 +67,11 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 * `to()`
 * `between()`
 
-**Data** (3 methods)
+### Information
 
-* `models()`
-* `planning()`
-* `log()`
+**Data**
+
+* `models()` will return array of models (collection of schedules)
 
 ### Hooks
 
