@@ -26,6 +26,12 @@ const validate = schema({
     Defaults
  ---------------------------------------- */
 
+/**
+ * This default preset will create some 
+ * configuration on the job object that can
+ * be overwritten setting the schedule. 
+ */ 
+
 const defaults = {
     watch: true,
     delay: 0
@@ -34,6 +40,12 @@ const defaults = {
 /** ----------------------------------------
     Job
  ---------------------------------------- */
+
+/**
+ * This function will set the job config
+ * as a default containing any relevant
+ * information. 
+ */
 
 const createJob = job => {
     return Object.assign(job, {
@@ -44,6 +56,11 @@ const createJob = job => {
     });
 };
 
+/**
+ * This function will assign the job
+ * to a given model and schedule.
+ */
+
 const assignJob = (job, { id, index }) => {
     return Object.assign(job, {
         parent: {
@@ -52,6 +69,17 @@ const assignJob = (job, { id, index }) => {
         }
     });
 };
+
+/**
+ * A job can be described as a single
+ * a single process that has to be resolved
+ * from the schedule. The jobs are listed 
+ * within the schedule method. A job 
+ * contains information about execution 
+ * a related details for setting watchers
+ * and resolving them in sync according
+ * to the given configuration.
+ */
 
 function job (desc, { id, index }) {
     const obj = { ...defaults, ...desc };
