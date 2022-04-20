@@ -38,7 +38,27 @@ const schema = schema => {
     const check = (value, type) => (_isArray(value) ? 'array' : typeof value) === type.name.toLowerCase();
     
     return obj => {
-        return true;
+        const keys = Object.keys(obj);
+
+        const checks = keys.reduce((array, key) => {
+            const types = schema[key];
+            const value = obj[key];
+
+            if(!types) return array;
+
+            const multiple = _isArray(types);
+            const compare = !multiple ? check(value, types) : types.some(type => check(value, type));
+
+            const log = multiple ? types.map(type => type.name).join(', ') : types.name;
+
+            if(!compare) console.error(`Given value for ${ key } (${ typeof value }) is not of a valid type matching the schema: [${ log }]`);
+
+            array.push(compare);
+
+            return array;
+        }, []);
+
+        return checks.every(check => !!check);
     };
 }; 
 
