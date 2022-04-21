@@ -2,7 +2,6 @@
     Utils
  ---------------------------------------- */
 
-import error from '@util/debug/_error';
 import _isType from '@util/check/_isType';
 
 /** ----------------------------------------
