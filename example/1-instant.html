@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangin Demo 1: Instant</title>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+
+<code id="log"></code>
+
+<!-- SCRIPTS -->
+<script src=".././dist/hangin.js"></script>
+
+<script>
+
+    /** ----------------------------------------
+        Hangin
+     ---------------------------------------- */
+
+    const hangin = new Hangin();
+
+    const log = message => {
+        const now = new Date();
+        const el = document.querySelector('#log');
+        el.innerHTML += `${ now }: ${ message } \n`;
+    }
+
+    const schedule = hangin.schedule([
+        {
+            name: 'Start app', 
+            delay: 1000,
+            action: next => { 
+                log('🙋‍♂️ Some data being fetched...');
+                next('PSYCH! There was no data!');
+            } 
+        },
+        {
+            name: 'Progress',
+            delay: 2000,
+            action: (next, payload) => {
+                log(`📬 Received data: "${ payload }"`);
+                next();
+            }
+        },
+        {
+            name: 'Finish',
+            delay: 500,
+            action: next => {
+                log('🎉 That\'s all folks...');
+                next();
+            }
+        }
+    ]) 
+    .instant()
+    .start();
+
+</script>
+</body>  
+</html>
