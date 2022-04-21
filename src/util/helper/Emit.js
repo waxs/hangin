@@ -2,21 +2,26 @@
     Utils
  ---------------------------------------- */
 
-import error from '@util/debug/_error';
-import timestamp from '@util/format/_timestamp';
-import id from '@util/function/_id';
+import _error from '@util/debug/_error';
+import _timestamp from '@util/format/_timestamp';
+import _id from '@util/function/_id';
 
 /** ----------------------------------------
     Validate
  ---------------------------------------- */
 
 const validate = (name, check) => {
-    return error(check, `A callback is mandatory for "${ name }", specify the event on('name', () => { ... }).`);
+    return _error(check, `A callback is mandatory for "${ name }", specify the event on('name', () => { ... }).`);
 };
 
 /** ----------------------------------------
     Emit
  ---------------------------------------- */
+
+/**
+ * Simple event emitter for handeling watcher
+ * and dispatching events.
+ */
 
 class Emit {
 
@@ -61,8 +66,8 @@ class Emit {
             this._handle(name);
 
             this._events[name].push({
-                id: id(),
-                timestamp: timestamp(),
+                id: _id(),
+                timestamp: _timestamp(),
                 callback
             });
         }
