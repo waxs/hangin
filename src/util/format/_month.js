@@ -57,6 +57,14 @@ const validateNumber = number => {
     Month
  ---------------------------------------- */
 
+/**
+ * Will parse a month string or number, and
+ * validate it's value. 
+ *
+ * @param { string, number } value - 1-12
+ * @return { number } validated month
+ */
+
 const month = value => {
     if(_isType(value) === 'string') {
         if(!validateString(value)) {

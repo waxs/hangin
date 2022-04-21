@@ -1,15 +1,4 @@
 /** ----------------------------------------
-    Validate
----------------------------------------- */
-
-const validateFormat = string => {
-    const regexDouble = /^(?:1[0-2]|0[0-9]):[0-5][0-9]$/;
-    const regexTriple = /^(?:1[0-2]|0[0-9]):[0-5][0-9]:[0-5][0-9]$/;
-    const check = !string.match(regexDouble) && !string.match(regexTriple);
-    return _error(check, `Not a valid time: ${ string }, use format: HH:MM or HH:MM:SS.`);
-};
-
-/** ----------------------------------------
     Correction
  ---------------------------------------- */
 
@@ -19,8 +8,16 @@ const correction = values => {
 };
 
 /** ----------------------------------------
-    Date
+    Time
 ---------------------------------------- */
+
+/**
+ * Will parse a string value to an array
+ * reflecting the time in a HH:MM format.
+ *
+ * @param { string } value - time in HH:MM
+ * @return { array } [HH, MM]
+ */
 
 const time = value => {
     const values = value.match(/[a-zA-Z]+|[0-9]+/g);

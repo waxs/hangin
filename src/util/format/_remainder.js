@@ -10,6 +10,16 @@ import _timestamp from '@util/format/_timestamp';
     Remainder
  ---------------------------------------- */
 
+/**
+ * The remainder function will determine 
+ * the remaining amount of between two
+ * timestamps.  
+ *
+ * @param { number } start - timestamp start
+ * @param { number } end - timestamp end
+ * @return { this } extend instance
+ */
+
 const remainder = (start, end) => {
     const now = _timestamp();
 

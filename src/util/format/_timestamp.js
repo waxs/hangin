@@ -46,6 +46,18 @@ const update = date => {
     Timestamp
  ---------------------------------------- */
 
+/**
+ * Create relevant time information for 
+ * scheduling tasks. The function will
+ * parse date and time in different 
+ * formats and set the current time if
+ * no date or time has been specified.
+ *
+ * @param { string, array } date - YYYY-MM-DD or [YYYY, MM, DD] format
+ * @param { string, array } date - HH:MM or [HH, MM] format
+ * @return { object } timestamp information
+ */
+
 const timestamp = (date, time = []) => {
     const now = [...dateNow(), ...timeNow()];
 

@@ -47,6 +47,14 @@ const validateNumber = number => {
     Day
  ---------------------------------------- */
 
+/**
+ * Will parse a day of the week string or 
+ * number, and validate it's value. 
+ *
+ * @param { string, number } value - shorthand or day of the week
+ * @return { number } validated day
+ */
+
 const day = value => {
     if(_isType(value) === 'string') {
         if(!validateString(value)) {

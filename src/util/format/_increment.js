@@ -9,6 +9,15 @@ import _timestamp from '@util/format/_timestamp';
     Increment
 ---------------------------------------- */
 
+/**
+ * Will increment a date with a given amount
+ * of days. Date can be specified as either
+ * an array or string. 
+ *
+ * @param { string, array } date - YYYY-MM-DD or [YYYY, MM, DD] format
+ * @return { array } formatted date
+ */
+
 const incrementDate = (date, days = 0) => {
     const stamp = _timestamp(); 
 

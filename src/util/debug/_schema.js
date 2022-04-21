@@ -10,7 +10,7 @@ import _isEmptyObj from '@util/check/_isEmptyObj';
 ---------------------------------------- */
 
 /**
- * A simple schema type validator for matching
+ * A simple (schema) type validator for matching
  * types. Used for type validation in objects, 
  * will return a closure that can validate a given
  * object. The closure will resolve a boolean
