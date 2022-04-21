@@ -23,9 +23,26 @@ Once Hangin JS has been initiated multiple options are available to schedule and
 hangin.schedule([ ... ]).every('week', 'saterday');
 ```
 
-## Pass data
+## Actions
 
-Jobs can pass information to the next job, this can be handy for resolving endpoints and then passing it to the next job that needs the data. In this case we resolve the data from an endpoint, we use the `next` resolver to pass the data to the next job that will log the data. The next job will recieve a `payload` as a second parameter that contains the data. 
+Using the `next()` resolver you are able to determine the next job being fired. Using the `next()` callback is mandatory for handeling the queue. Each job should therefor call and execute this function to keep the queue in sync. A function call be assigned to the `action` key, futhermore you are able to give your job a specific name and configure a delay. The name of the job can be used to track progress with the according event listener. These will fire once an action has been executed from the queue. 
+
+```javascript
+hangin.schedule([
+    {
+        name: 'Start app',
+        action: next => { ... }
+    }
+]);
+
+hangin.event.on('progress', ({ state }) => {
+    console.log(state); // Start app
+});
+```
+
+### Payloads
+
+Jobs can pass information to the next job, this can be handy for resolving endpoints and then passing it to the next job that needs the data. In this case we resolve the data from an endpoint, we use the `next` resolver to pass the data to the next job that will log the data. The next job will recieve a `payload` as a second parameter that contains the data. Using this approach you are able to decouple multiple tasks with their own responsiblities. 
 
 ```javascript
 hangin.schedule([
@@ -58,7 +75,7 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 *  `job()` set a single job and plan it's excecution
 *  `schedule()` add multiple jobs to a schedule
 
-**Loop** (10 methods)
+**Loops** (10 methods)
 
 * `cron()` used for setting a cron job like `.cron('* * * * *')`
 * `daily()` set daily execution at specific time `.daily('14:00')`
@@ -73,16 +90,16 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 
 **Once** (4 methods)
 
-* `date()` set on a given date `.date('2022-02-12')`
+* `date()` set on a given date `.date('2022-02-12')` using YYYY-MM-DD format
 * `instant()` will execute instantly after running the script
 * `once()` will execute once on a given day and time `.once('2022-02-12', '11:45')`
 * `timestamp()` set a specific timestamp for execution
 
 **Extension** (1 methods)
 
-* `at()` can be combined for setting a specific time `.at('14:00')`
+* `at()` can be combined for setting a specific time `.daily().at('14:00')`
 
-**Limiter** (5 methods)
+**Limiter** (5 methods) 🚧
 
 * `times()`
 * `untill()`
@@ -92,19 +109,15 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 
 ### Information
 
+You can retrieve information from the queue using some of the getters that will retract information from scheduled jobs. 
+
 **Data**
 
-* `models()` will return array of models (collection of schedules)
+* `models` will return array of models (collection of schedules)
 
 ### Hooks
 
 Hooks provivide a way to monitor changes taking place. For instance, a specific method is called like the `play()` event. The hook will dispatch once the function is called. You can register new hooks with the `event` method, the `on` function will provide you with a function to call a specific event and a callback that will be fired once the event takes place. You are able to register multiple hooks for the same event, an example is shown below: 
-
-```javascript
-hangin.event.on('active', payload => {
-    console.log(`Active has been changed: ${ payload }.`);
-});
-```
 
 ```javascript
 hangin.event.on('loading', state => {
@@ -151,4 +164,4 @@ The architecture revoles around jobs, jobs are then added to events, these event
 
 ## About
 
-Check out my [personal website](http://sanderhidding.nl) for more information. That's all folks! Cheers.
+Currently I'm still working on the package. Check out my [personal website](http://sanderhidding.nl) for more information. That's all folks! Cheers.
