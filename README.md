@@ -99,13 +99,12 @@ Hangin is as simple, select the methods from the toolbox to describe events, log
 
 * `at()` can be combined for setting a specific time `.daily().at('14:00')`
 
-**Limiter** (5 methods) 🚧
+**Limiter** (4 methods)
 
-* `times()`
-* `untill()`
-* `between()`
-* `from()`
-* `to()`
+* `begin()` set a delay by date (and time) to start the schedule
+* `between()` shorthand for begin and end, use array
+* `end()` set a hard date (and time) to end the schedule
+* `times()` maximum amount of runs
 
 ### Information
 
@@ -130,7 +129,9 @@ The following hooks are available:
 **State:**
 
 - `active` this value will show if the script is active
-- `done` this event will fire once the schedule is completed
+- `done` this event will fire eacht time the schedule is completed
+- `completed` this event will fire if a limit is reached for a given schedule
+- `execute` this event will execute each time the schedule fires
 - `loading` will return if the loading state
 - `play` executed once the `start()` method has been called
 - `planned` returns all planned models
