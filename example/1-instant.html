@@ -23,7 +23,7 @@
     const log = message => {
         const now = new Date();
         const el = document.querySelector('#log');
-        el.innerHTML += `${ now }: ${ message } \n`;
+        el.innerHTML += `${ now }: ${ message } <br/>`;
     }
 
     const schedule = hangin.schedule([
