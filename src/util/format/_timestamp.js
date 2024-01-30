@@ -29,6 +29,26 @@ const timeNow = () => {
 };
 
 /** ----------------------------------------
+    Format String
+ ---------------------------------------- */
+
+const formatDate = date => {
+    if(_isType(date) === 'string') {
+        return date.split('-');
+    }
+
+    return date;
+};
+
+const formatTime = time => {
+    if(_isType(time) === 'string') {
+        return time.split(':');
+    }
+
+    return time;
+};
+
+/** ----------------------------------------
     Correction
  ---------------------------------------- */
 
@@ -39,7 +59,7 @@ const correction = date => {
 
 const update = date => {
     if(date) date[1]++;
-    return date;
+    return date.map(value => Number(value));
 };
 
 /** ----------------------------------------
@@ -61,16 +81,19 @@ const update = date => {
 const timestamp = (date, time = []) => {
     const now = [...dateNow(), ...timeNow()];
 
-    const corrected = correction(date);
-    const values = date ? [...corrected, ...time] : now;
+    const _date = formatDate(date);
+    const _time = formatTime(time);
+
+    const corrected = correction(_date);
+    const values = _date ? [...corrected, ..._time] : now;
 
     const stamp = new Date(...values);
     const unix = stamp.getTime();
 
     return {
         values: update(values),
-        date: update(date || dateNow()),
-        time: time.length ? time : timeNow(),
+        date: update(_date || dateNow()),
+        time: _time.length ? _time : timeNow(),
         stamp,
         unix
     };
