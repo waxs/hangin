@@ -1,6 +1,6 @@
 {
   "name": "@waxs/hangin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Hang-in there, data is coming! Schedule jobs, plan, and await the outcome with hangin JS.",
   "main": "dist/hangin.pkg.js",
   "scripts": {
