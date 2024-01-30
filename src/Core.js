@@ -26,6 +26,7 @@ import actions from '@method/actions';
 import controls from '@method/controls';
 import data from '@method/data';
 import handle from '@method/handle';
+import limiter from '@method/limiter';
 import schedule from '@method/schedule';
 
 /** ----------------------------------------
@@ -36,6 +37,7 @@ extend(Core, actions);
 extend(Core, controls);
 extend(Core, data);
 extend(Core, handle);
+extend(Core, limiter);
 extend(Core, schedule);
 
 /** ----------------------------------------

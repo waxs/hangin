@@ -27,7 +27,6 @@ class Hangin extends Core {
         if(typeof window !== 'undefined' || typeof global !== 'undefined') {
             construct(this, config);
         }
-        
     }
 
 }

@@ -13,6 +13,7 @@ import daily from './loop/_daily';
 import every from './loop/_every';
 import hourly from './loop/_hourly';
 import interval from './loop/_interval';
+import loop from './loop/_loop';
 import monthly from './loop/_monthly';
 import weekdays from './loop/_weekdays';
 import weekend from './loop/_weekend'; 
@@ -41,6 +42,7 @@ export default {
     hourly,
     instant,
     interval,
+    loop,
     monthly,
     once,
     timestamp,
