@@ -2,12 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hangin Demo 1: Instant</title>
+    <title>Hangin Demo 2: Limiter</title>
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 
-<h3><span class="clock"></span>This schedule will run once the page is loaded</h3>
+<h3><span class="clock"></span>This schedule will create a loop, but has been limited to a maximum of 3 runs</h3>
 <code id="log"></code>
 
 <!-- SCRIPTS -->
@@ -24,38 +24,47 @@
 
     const schedule = hangin.schedule([
         {
-            name: 'Start app', 
-            delay: 1000,
+            name: 'MSDOS Protocol', 
+            delay: 500,
             action: next => { 
-                log('💾 Some data being fetched...');
-                next('PSYCH! There was no data!');
+                log('FAKING MS DOS');
+                next();
             } 
         },
         {
-            name: 'Progress',
+            name: 'Loads the high memory manager',
             delay: 2000,
             action: (next, payload) => {
-                log(`📬 Received data: "${ payload }"`);
+                log(`DEVICE=HIMEM.SYS`);
                 next();
             }
         },
         {
-            name: 'Finish',
+            name: 'Loads the DOS kernel',
             delay: 500,
             action: next => {
-                log('🎉 That\'s all folks...');
+                log('DOS=HIGH,UMB');
+                next();
+            }
+        },
+        {
+            name: 'Loads the expanded memory manager',
+            delay: 1000,
+            action: next => {
+                log('DEVICE=EMM386.EXE NOEMS \n');
                 next();
             }
         }
-    ]) 
-    .instant()
+    ])
+    .loop()
+    .times(3)
     .start();
 
     /** ----------------------------------------
         Clock
      ---------------------------------------- */
 
-     clock.start();
+    clock.start();
 
     /** ----------------------------------------
         Hooks

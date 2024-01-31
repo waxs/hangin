@@ -2,12 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hangin Demo 1: Instant</title>
+    <title>Hangin Demo 3: Repeat</title>
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 
-<h3><span class="clock"></span>This schedule will run once the page is loaded</h3>
+<h3><span class="clock"></span>This schedule will repeat every minute</h3>
 <code id="log"></code>
 
 <!-- SCRIPTS -->
@@ -24,42 +24,50 @@
 
     const schedule = hangin.schedule([
         {
-            name: 'Start app', 
+            name: '💡 Do a little something', 
             delay: 1000,
             action: next => { 
-                log('💾 Some data being fetched...');
-                next('PSYCH! There was no data!');
+                log('First action');
+                next();
             } 
         },
         {
-            name: 'Progress',
-            delay: 2000,
+            name: '🚀 One more thing', 
+            delay: 1000,
             action: (next, payload) => {
-                log(`📬 Received data: "${ payload }"`);
+                log(`Second action`);
                 next();
             }
         },
         {
-            name: 'Finish',
-            delay: 500,
+            name: '🫡 Wrap it up', 
+            delay: 1000,
             action: next => {
-                log('🎉 That\'s all folks...');
+                log(`Third action \n`);
                 next();
             }
         }
-    ]) 
-    .instant()
+    ])
+    .every('minute')
     .start();
 
     /** ----------------------------------------
         Clock
      ---------------------------------------- */
 
-     clock.start();
+    clock.start();
 
     /** ----------------------------------------
         Hooks
      ---------------------------------------- */
+
+    hangin.event.on('play', info => {
+        log(`<b>Planned schedule: ${ date(info.next) }</b> \n`);
+    });
+
+    hangin.event.on('done',  info => {
+        log(`<b>Planned schedule: ${ date(info.next) }</b> \n`);
+    });
 
     hangin.event.on('execute', () => {
         clock.change('red');

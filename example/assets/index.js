@@ -1,3 +1,7 @@
+/** ----------------------------------------
+    Clock
+---------------------------------------- */
+
 const clock = {
     _el: document.querySelector('.clock'),
     _color: 'black',
@@ -28,16 +32,7 @@ const clock = {
 
     style: function(config = {}) {
         const styles = {
-            width: 'auto',
-            padding: '0.5rem',
-            borderRadius: '0.25em',
             background: `${this._color}`,
-            fontFamily: 'Helvetica',
-            color: 'white',
-            position: 'absolute',
-            bottom: '1rem',
-            right: '1rem',
-            transition: 'background 0.2s ease',
             ...config
         };
 
@@ -56,8 +51,7 @@ const clock = {
 
     update: function() {
         this._el.innerHTML = `
-            <span class="date" style="font-size: 0.75em">${ this.date }</span>
-            <div class="time">${ this.time }</div>
+            <span class="time">${ this.time }</span>
         `;
 
         this.style();
@@ -72,3 +66,42 @@ const clock = {
         this.update();
     }
 };
+
+/** ----------------------------------------
+    Log
+---------------------------------------- */
+
+const log = message => {
+    const now = new Date();
+    const el = document.querySelector('#log');
+    el.innerHTML += `${ now }: ${ message } <br/>`;
+};
+
+/** ----------------------------------------
+    Date Format
+---------------------------------------- */
+
+const date = date => {
+    const digits = array => {
+        return array.map(value => {
+            return ('0' + value).slice(-2)
+        });
+    };
+
+    const formatDate = [
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    ];
+    
+    const formatTime = [
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+    ];
+
+    const dateDigits = digits(formatDate);
+    const timeDigits = digits(formatTime);
+
+    return `${ dateDigits.join('/') } ${ timeDigits.join(':') }` 
+}

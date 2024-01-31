@@ -2,13 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hangin Demo 1: Instant</title>
+    <title>Hangin Demo 4: Update</title>
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 
-<h3><span class="clock"></span>This schedule will run once the page is loaded</h3>
+<h3><span class="clock"></span>This schedule needs to be manually activated using the button</h3>
 <code id="log"></code>
+<button id="update">Update</button>
 
 <!-- SCRIPTS -->
 <script src="./assets/index.js"></script>
@@ -25,15 +26,14 @@
     const schedule = hangin.schedule([
         {
             name: 'Start app', 
-            delay: 1000,
             action: next => { 
-                log('💾 Some data being fetched...');
+                log('🙋‍♂️ Some data being fetched...');
                 next('PSYCH! There was no data!');
             } 
         },
         {
             name: 'Progress',
-            delay: 2000,
+            delay: 1000,
             action: (next, payload) => {
                 log(`📬 Received data: "${ payload }"`);
                 next();
@@ -47,22 +47,22 @@
                 next();
             }
         }
-    ]) 
-    .instant()
-    .start();
+    ]);
 
     /** ----------------------------------------
         Clock
      ---------------------------------------- */
 
-     clock.start();
+    clock.start();
 
     /** ----------------------------------------
-        Hooks
+        Button
      ---------------------------------------- */
 
-    hangin.event.on('execute', () => {
-        clock.change('red');
+    const button = document.querySelector('#update');
+
+    button.addEventListener('click', function() {
+        hangin.update.call(hangin);
     });
 
 </script>
