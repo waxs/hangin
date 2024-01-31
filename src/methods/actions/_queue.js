@@ -24,7 +24,6 @@ function queue(schedule, jobs) {
 
     loading.then(() => {
         this.loading = false;
-        this.event.dispatch('done', schedule);
     }); 
 
     return {

@@ -22,8 +22,8 @@ function start() {
         this.plan();
 
         this.event.dispatch('play', {
-            remainer: schedule.next,
-            next: schedule.next && new Date(schedule.planned)
+            remainer: schedule.next || null,
+            next: schedule.next ? new Date(schedule.planned) : null
         });
     }, schedule.delay || 0);
 }

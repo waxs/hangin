@@ -42,12 +42,12 @@ function plan() {
         const block = cancel(schedule);
 
         if(block) {
-            this.event.dispatch('completed');
-
             this.apply({
                 active: false,
                 stop: _timestamp()
             });
+            
+            this.event.dispatch('completed');
 
             return;
         }
@@ -59,6 +59,11 @@ function plan() {
 
             queue.completed.then(() => {
                 routine === 'loop' ? this.plan() : clearTimeout(timer);
+                
+                this.event.dispatch('done', {
+                    remainer: schedule.next || null,
+                    next: schedule.next ? new Date(schedule.planned) : null
+                });
             });
         };
 
@@ -66,7 +71,7 @@ function plan() {
 
         this.apply({ 
             timeout: timer.fn,
-            // remain: limit ? limit - times : null,
+            remain: limit ? limit - times : null,
             times: times + 1,
             planned: _cron(cron),
             next: routine === 'loop' && amount
