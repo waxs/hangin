@@ -88,9 +88,19 @@ const date = date => {
         });
     };
 
+    const formatDays = [
+        'Sun',
+        'Mon',
+        'Tue',
+        'Wed',
+        'Thu',
+        'Fri',
+        'Sat'
+    ];
+
     const formatDate = [
         date.getFullYear(),
-        date.getMonth(),
+        date.getMonth() + 1,
         date.getDate()
     ];
     
@@ -100,8 +110,7 @@ const date = date => {
         date.getSeconds()
     ];
 
-    const dateDigits = digits(formatDate);
     const timeDigits = digits(formatTime);
 
-    return `${ dateDigits.join('/') } ${ timeDigits.join(':') }` 
+    return `${ formatDays[date.getDay()] } ${ formatDate.join('/') } ${ timeDigits.join(':') }` 
 }
